@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gufran Vault</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #090d16;
+    }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="flex justify-center items-center min-h-screen sm:p-4 text-white">
+
+  <!-- Mobile App Frame Container -->
+  <div class="w-full max-w-md h-[100vh] sm:h-[860px] bg-slate-950 sm:rounded-[40px] shadow-2xl flex flex-col relative overflow-hidden border border-slate-800">
+    
+    <!-- App Top Bar -->
+    <header class="bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 p-5 rounded-b-3xl shadow-xl shrink-0">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-black tracking-wide flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-yellow-300"></i> Gufran Vault
+          </h1>
+          <p class="text-xs text-white/80 font-medium">Secure & Colourful Digital Locker</p>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-md border border-white/30">
+          <i class="fa-solid fa-lock text-white text-lg"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main View Area -->
+    <main id="mainContainer" class="flex-1 overflow-y-auto p-4 custom-scrollbar">
+      
+      <!-- Category Grid View (Default) -->
+      <div id="categoryGrid" class="space-y-4">
+        <h2 class="text-xs uppercase tracking-widest font-semibold text-slate-400 px-1">Vault Categories</h2>
+        
+        <!-- Category Cards -->
+        <div class="grid grid-cols-2 gap-3">
+          
+          <!-- Images Category -->
+          <div onclick="openCategory('images')" class="glass-effect bg-gradient-to-br from-pink-600/30 to-purple-800/30 p-4 rounded-2xl border border-pink-500/30 cursor-pointer transform transition hover:scale-105 active:scale-95 flex flex-col justify-between h-36 relative overflow-hidden group">
+            <div class="flex justify-between items-start">
+              <div class="w-10 h-10 rounded-xl bg-pink-500 flex items-center justify-center text-white shadow-lg shadow-pink-500/40">
+                <i class="fa-solid fa-image text-lg"></i>
+              </div>
+              <span id="lock-badge-images" class="text-xs bg-slate-900/80 px-2 py-1 rounded-full text-slate-300">
+                <i class="fa-solid fa-lock text-slate-400"></i>
+              </span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-pink-200">Images</h3>
+              <p id="count-images" class="text-xs text-pink-300/70">0 Items Saved</p>
+            </div>
+          </div>
+
+          <!-- Documents Category -->
+          <div onclick="openCategory('documents')" class="glass-effect bg-gradient-to-br from-blue-600/30 to-indigo-800/30 p-4 rounded-2xl border border-blue-500/30 cursor-pointer transform transition hover:scale-105 active:scale-95 flex flex-col justify-between h-36 relative overflow-hidden group">
+            <div class="flex justify-between items-start">
+              <div class="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center text-white shadow-lg shadow-blue-500/40">
+                <i class="fa-solid fa-file-lines text-lg"></i>
+              </div>
+              <span id="lock-badge-documents" class="text-xs bg-slate-900/80 px-2 py-1 rounded-full text-slate-300">
+                <i class="fa-solid fa-lock text-slate-400"></i>
+              </span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-blue-200">Documents</h3>
+              <p id="count-documents" class="text-xs text-blue-300/70">0 Items Saved</p>
+            </div>
+          </div>
+
+          <!-- Links Category -->
+          <div onclick="openCategory('links')" class="glass-effect bg-gradient-to-br from-emerald-600/30 to-teal-800/30 p-4 rounded-2xl border border-emerald-500/30 cursor-pointer transform transition hover:scale-105 active:scale-95 flex flex-col justify-between h-36 relative overflow-hidden group">
+            <div class="flex justify-between items-start">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-white shadow-lg shadow-emerald-500/40">
+                <i class="fa-solid fa-link text-lg"></i>
+              </div>
+              <span id="lock-badge-links" class="text-xs bg-slate-900/80 px-2 py-1 rounded-full text-slate-300">
+                <i class="fa-solid fa-lock text-slate-400"></i>
+              </span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-emerald-200">Links</h3>
+              <p id="count-links" class="text-xs text-emerald-300/70">0 Items Saved</p>
+            </div>
+          </div>
+
+          <!-- Notes Category -->
+          <div onclick="openCategory('notes')" class="glass-effect bg-gradient-to-br from-amber-600/30 to-orange-800/30 p-4 rounded-2xl border border-amber-500/30 cursor-pointer transform transition hover:scale-105 active:scale-95 flex flex-col justify-between h-36 relative overflow-hidden group">
+            <div class="flex justify-between items-start">
+              <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-white shadow-lg shadow-amber-500/40">
+                <i class="fa-solid fa-note-sticky text-lg"></i>
+              </div>
+              <span id="lock-badge-notes" class="text-xs bg-slate-900/80 px-2 py-1 rounded-full text-slate-300">
+                <i class="fa-solid fa-lock text-slate-400"></i>
+              </span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-amber-200">Notes</h3>
+              <p id="count-notes" class="text-xs text-amber-300/70">0 Items Saved</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Items Content Display View (Hidden by default) -->
+      <div id="contentView" class="hidden space-y-4">
+        <div class="flex justify-between items-center pb-2 border-b border-slate-800">
+          <button onclick="showCategories()" class="flex items-center gap-2 text-sm text-slate-400 hover:text-white bg-slate-800 px-3 py-1.5 rounded-full">
+            <i class="fa-solid fa-arrow-left"></i> Back
+          </button>
+          <h2 id="activeCategoryTitle" class="text-lg font-bold capitalize text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-400">
+            Category
+          </h2>
+          <button onclick="openSetPasswordModal()" class="text-xs bg-purple-600/40 border border-purple-500/50 hover:bg-purple-600 text-purple-200 px-3 py-1.5 rounded-full flex items-center gap-1">
+            <i class="fa-solid fa-key"></i> Lock Settings
+          </button>
+        </div>
+
+        <div id="itemsList" class="space-y-3">
+          <!-- Dynamic Items inserted here -->
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Floating Add Button -->
+    <button onclick="openAddItemModal()" class="absolute bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl shadow-xl shadow-purple-600/40 hover:scale-110 active:scale-95 transition">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+
+  </div>
+
+  <!-- MODAL: Password Prompt -->
+  <div id="passwordModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center p-4 hidden z-50">
+    <div class="glass-effect bg-slate-900 w-full max-w-xs p-6 rounded-3xl border border-slate-700 space-y-4 relative">
+      <h3 class="text-lg font-bold text-center text-slate-100">Enter Category Password</h3>
+      <div class="relative">
+        <input type="password" id="passInput" placeholder="Enter Password..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 pr-10 text-white">
+        <button onclick="togglePasswordVisibility('passInput', 'eyeIcon1')" class="absolute right-3 top-3.5 text-slate-400 hover:text-white">
+          <i id="eyeIcon1" class="fa-solid fa-eye"></i>
+        </button>
+      </div>
+      <p id="passError" class="text-xs text-red-400 text-center hidden">Incorrect Password!</p>
+      <div class="flex gap-2">
+        <button onclick="closePasswordModal()" class="w-1/2 bg-slate-800 py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-700">Cancel</button>
+        <button onclick="verifyPassword()" class="w-1/2 bg-gradient-to-r from-pink-500 to-purple-600 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Set / Change Password -->
+  <div id="setPasswordModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center p-4 hidden z-50">
+    <div class="glass-effect bg-slate-900 w-full max-w-xs p-6 rounded-3xl border border-slate-700 space-y-4">
+      <h3 class="text-lg font-bold text-center text-purple-300">Set Category Lock</h3>
+      <p class="text-xs text-slate-400 text-center">Set or remove password for this category.</p>
+      <div class="relative">
+        <input type="password" id="newPassInput" placeholder="New Password (Leave blank to remove)" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 pr-10 text-white">
+        <button onclick="togglePasswordVisibility('newPassInput', 'eyeIcon2')" class="absolute right-3 top-3.5 text-slate-400 hover:text-white">
+          <i id="eyeIcon2" class="fa-solid fa-eye"></i>
+        </button>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="closeSetPasswordModal()" class="w-1/2 bg-slate-800 py-2.5 rounded-xl text-sm font-semibold">Cancel</button>
+        <button onclick="saveCategoryPassword()" class="w-1/2 bg-purple-600 py-2.5 rounded-xl text-sm font-semibold hover:bg-purple-500">Save Password</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Add New Item -->
+  <div id="addItemModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex justify-center items-center p-4 hidden z-50">
+    <div class="glass-effect bg-slate-900 w-full max-w-sm p-6 rounded-3xl border border-slate-700 space-y-4">
+      <div class="flex justify-between items-center">
+        <h3 class="text-lg font-bold text-pink-400">Add Item to Vault</h3>
+        <button onclick="closeAddItemModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs text-slate-400 block mb-1">Category</label>
+          <select id="itemCategorySelect" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-sm focus:outline-none text-white">
+            <option value="images">📸 Image</option>
+            <option value="documents">📄 Document</option>
+            <option value="links">🔗 Link</option>
+            <option value="notes">📝 Note</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-xs text-slate-400 block mb-1">Title</label>
+          <input type="text" id="itemTitle" placeholder="Enter title..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-sm focus:outline-none text-white">
+        </div>
+
+        <!-- File Input for Image/Doc -->
+        <div>
+          <label class="text-xs text-slate-400 block mb-1">Upload File / Image (Optional)</label>
+          <input type="file" id="itemFile" accept="image/*,.pdf,.doc,.txt" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700">
+        </div>
+
+        <div>
+          <label class="text-xs text-slate-400 block mb-1">Content / URL / Description</label>
+          <textarea id="itemContent" rows="3" placeholder="Enter link URL or note content..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-sm focus:outline-none text-white custom-scrollbar"></textarea>
+        </div>
+      </div>
+
+      <button onclick="saveVaultItem()" class="w-full bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 py-3 rounded-xl font-bold text-sm shadow-lg hover:opacity-95">
+        Save Permanently
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // App State Management
+    let vaultData = JSON.parse(localStorage.getItem('gufran_vault_data')) || {
+      images: [],
+      documents: [],
+      links: [],
+      notes: []
+    };
+
+    let vaultPasswords = JSON.parse(localStorage.getItem('gufran_vault_passwords')) || {
+      images: '',
+      documents: '',
+      links: '',
+      notes: ''
+    };
+
+    let activeCategory = null;
+
+    // Initialize Counts and Badges
+    function updateUI() {
+      const categories = ['images', 'documents', 'links', 'notes'];
+      categories.forEach(cat => {
+        // Count
+        const countEl = document.getElementById(`count-${cat}`);
+        if(countEl) countEl.innerText = `${vaultData[cat].length} Items Saved`;
+        
+        // Lock Icon
+        const badgeEl = document.getElementById(`lock-badge-${cat}`);
+        if(badgeEl) {
+          if(vaultPasswords[cat]) {
+            badgeEl.innerHTML = `<i class="fa-solid fa-lock text-pink-400"></i> Locked`;
+            badgeEl.className = "text-xs bg-pink-950/80 border border-pink-500/30 px-2 py-0.5 rounded-full text-pink-300";
+          } else {
+            badgeEl.innerHTML = `<i class="fa-solid fa-lock-open text-emerald-400"></i> Open`;
+            badgeEl.className = "text-xs bg-emerald-950/80 border border-emerald-500/30 px-2 py-0.5 rounded-full text-emerald-300";
+          }
+        }
+      });
+      localStorage.setItem('gufran_vault_data', JSON.stringify(vaultData));
+      localStorage.setItem('gufran_vault_passwords', JSON.stringify(vaultPasswords));
+    }
+
+    // Category Navigation
+    function openCategory(cat) {
+      activeCategory = cat;
+      if (vaultPasswords[cat]) {
+        document.getElementById('passInput').value = '';
+        document.getElementById('passError').classList.add('hidden');
+        document.getElementById('passwordModal').classList.remove('hidden');
+      } else {
+        renderCategoryContent();
+      }
+    }
+
+    function verifyPassword() {
+      const entered = document.getElementById('passInput').value;
+      if (entered === vaultPasswords[activeCategory]) {
+        closePasswordModal();
+        renderCategoryContent();
+      } else {
+        document.getElementById('passError').classList.remove('hidden');
+      }
+    }
+
+    function renderCategoryContent() {
+      document.getElementById('categoryGrid').classList.add('hidden');
+      document.getElementById('contentView').classList.remove('hidden');
+      document.getElementById('activeCategoryTitle').innerText = activeCategory;
+
+      const listContainer = document.getElementById('itemsList');
+      listContainer.innerHTML = '';
+
+      const items = vaultData[activeCategory] || [];
+      if (items.length === 0) {
+        listContainer.innerHTML = `
+          <div class="text-center py-12 text-slate-500">
+            <i class="fa-solid fa-folder-open text-4xl mb-2"></i>
+            <p class="text-sm">Is category me abhi koi items nahi hain.</p>
+          </div>`;
+        return;
+      }
+
+      items.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = "glass-effect p-4 rounded-2xl border border-slate-800 space-y-2 relative group";
+        
+        let fileDisplay = '';
+        if (item.fileData) {
+          if (item.fileData.startsWith('data:image')) {
+            fileDisplay = `<img src="${item.fileData}" class="w-full max-h-48 object-cover rounded-xl mt-2 border border-slate-700" />`;
+          } else {
+            fileDisplay = `<a href="${item.fileData}" download="${item.title}" class="inline-flex items-center gap-2 text-xs text-cyan-400 mt-2 bg-cyan-950/50 px-3 py-1.5 rounded-lg border border-cyan-800"><i class="fa-solid fa-download"></i> Download Attached File</a>`;
+          }
+        }
+
+        let linkDisplay = '';
+        if (activeCategory === 'links' && item.content) {
+          linkDisplay = `<a href="${item.content}" target="_blank" class="text-xs text-pink-400 underline break-all block mt-1"><i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> ${item.content}</a>`;
+        }
+
+        card.innerHTML = `
+          <div class="flex justify-between items-start">
+            <h4 class="font-bold text-slate-100">${item.title}</h4>
+            <button onclick="deleteItem('${activeCategory}', ${index})" class="text-slate-500 hover:text-red-400 p-1">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+          ${item.content && activeCategory !== 'links' ? `<p class="text-xs text-slate-300 whitespace-pre-wrap">${item.content}</p>` : ''}
+          ${linkDisplay}
+          ${fileDisplay}
+          <span class="text-[10px] text-slate-500 block pt-1">${item.date}</span>
+        `;
+        listContainer.appendChild(card);
+      });
+    }
+
+    function showCategories() {
+      document.getElementById('contentView').classList.add('hidden');
+      document.getElementById('categoryGrid').classList.remove('hidden');
+      activeCategory = null;
+      updateUI();
+    }
+
+    // Toggle Password Visibility (Eye Icon)
+    function togglePasswordVisibility(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+
+    // Modal Handlers
+    function closePasswordModal() {
+      document.getElementById('passwordModal').classList.add('hidden');
+    }
+
+    function openSetPasswordModal() {
+      document.getElementById('newPassInput').value = vaultPasswords[activeCategory] || '';
+      document.getElementById('setPasswordModal').classList.remove('hidden');
+    }
+
+    function closeSetPasswordModal() {
+      document.getElementById('setPasswordModal').classList.add('hidden');
+    }
+
+    function saveCategoryPassword() {
+      const newPass = document.getElementById('newPassInput').value.trim();
+      vaultPasswords[activeCategory] = newPass;
+      closeSetPasswordModal();
+      updateUI();
+      alert(`Password updated for ${activeCategory}!`);
+    }
+
+    function openAddItemModal() {
+      if (activeCategory) {
+        document.getElementById('itemCategorySelect').value = activeCategory;
+      }
+      document.getElementById('addItemModal').classList.remove('hidden');
+    }
+
+    function closeAddItemModal() {
+      document.getElementById('addItemModal').classList.add('hidden');
+      document.getElementById('itemTitle').value = '';
+      document.getElementById('itemContent').value = '';
+      document.getElementById('itemFile').value = '';
+    }
+
+    // Save New Item with File Reader
+    function saveVaultItem() {
+      const category = document.getElementById('itemCategorySelect').value;
+      const title = document.getElementById('itemTitle').value.trim();
+      const content = document.getElementById('itemContent').value.trim();
+      const fileInput = document.getElementById('itemFile');
+      const file = fileInput.files[0];
+
+      if (!title) {
+        alert('Kripya title zaroor bharein!');
+        return;
+      }
+
+      const newItem = {
+        title: title,
+        content: content,
+        fileData: null,
+        date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+      };
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          newItem.fileData = e.target.result;
+          vaultData[category].push(newItem);
+          finalizeSave(category);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        vaultData[category].push(newItem);
+        finalizeSave(category);
+      }
+    }
+
+    function finalizeSave(category) {
+      closeAddItemModal();
+      updateUI();
+      if (activeCategory === category) {
+        renderCategoryContent();
+      } else {
+        openCategory(category);
+      }
+    }
+
+    function deleteItem(cat, index) {
+      if (confirm('Kya aap is item ko delete karna chahte hain?')) {
+        vaultData[cat].splice(index, 1);
+        updateUI();
+        renderCategoryContent();
+      }
+    }
+
+    // Initial load
+    updateUI();
+  </script>
+</body>
+</html>
